@@ -10,11 +10,11 @@
 	padding-top: 20px;
 }
 
-.tags.edit .tag {
+.tags.edit .tag, .langs.edit .language {
 	cursor: pointer;
 }
 
-.tag {
+.tag, .language {
 	min-width: 16px;
 	height: 18px;
 	margin: 5px 5px 0 0;
@@ -31,7 +31,7 @@
 	-webkit-border-radius: 6px;
 }
 
-.tag.selected {
+.tag.selected, .language.selected {
 	background-color: #090;
 	text-shadow:0px 1px 0px #000;
 	color: #FFF;
