@@ -9,7 +9,7 @@
                         <li><a href="<?=site_url("about")?>">About</a></li>
                 </ul>
 
-                <p>Copyright &copy; 2015 Circle of Hope</p>
+                <p>Copyright &copy; 2012-2015 Circle of Hope</p>
 
                 <div class="clear"></div>
 
