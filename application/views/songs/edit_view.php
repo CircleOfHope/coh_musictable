@@ -11,7 +11,7 @@
   $('.floating-info').delay(3000).fadeOut();
 </script>
 <? } ?>
-<h1><?= $song->Title ?></h1>
+<h1><?= $song->Title ?></h1><?= anchor('songs/detail/'.$song->id,'[Detail]') ?>
 <div class="line"></div>
 
 <div class="column-one">
@@ -51,30 +51,20 @@
 </div>
 
 <div class="column-two">
-  <h4>Tags</h4>
-  <div class="line"></div>
-<?php if ($id == 0) { ?>
-  <p class="gray-message">Save the song before adding tags.</p>
-<? } else { ?>
-  <ul class="basic horizontal tags edit">
-<?php foreach ($alltags as $tagid => $tag) { ?>
-    <li data-key="<?= $tagid ?>" class="tag iecss3 <?= array_key_exists($tagid, $tags) ? "selected" : "" ?>"><?= $tag ?></li>
-<? } ?>
-  </ul>
-  <div class="clear"></div>
-<? } ?>
 
-  <h4>Languages</h4>
-  <div class="line"></div>
-<?php if ($id == 0) { ?>
+<?php foreach ($allltags as $tagtypename => $tag) { ?>
+    <h4><?= $tagtypename ?></h4>
+    <div class="line"></div>
+    <?php if ($id == 0) { ?>
   <p class="gray-message">Save the song before adding languages.</p>
-<? } else { ?>
-  <ul class="basic horizontal langs edit">
-<?php foreach ($alllangs as $langid => $lang) { ?>
-    <li data-key="<?= $langid ?>" class="language iecss3 <?= array_key_exists($langid, $languages) ? "selected" : "" ?>"><?= $lang ?></li>
-<? } ?>
+  <? } else { ?>
+  <ul class="basic horizontal tags edit">
+    <?php foreach ($tag as $tagid => $t) { ?>
+    <li data-key="<?= $tagid ?>" class="tag iecss3 <?= array_key_exists($tagid, $tags) ? "selected" : "" ?>"><?= $t ?></li>
+    <? } ?>
   </ul>
   <div class="clear"></div>
+  <? } ?>
 <? } ?>
 
   <h4>Attachments</h4>

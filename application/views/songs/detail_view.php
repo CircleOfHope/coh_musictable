@@ -47,14 +47,19 @@
 </div>
 
 <div class="column-two">
-	<h4>Tags</h4>
-	<div class="line"></div>
-	<ul class="basic horizontal tags">
-<?php foreach($tags as $tagid => $tag): ?>
-		<li class="tag iecss3"><?=$tag?></li>
-<?php $count++; endforeach; ?>
-	</ul>
-	<div class="clear"></div>
+
+<?php foreach ($allltags as $tagtypename => $tag) { ?>
+    <h4><?= $tagtypename ?></h4>
+    <div class="line"></div>
+  <ul class="basic horizontal tags">
+    <?php foreach ($tag as $tagid => $t) { ?>
+    <?php if(array_key_exists($tagid, $tags)) { ?>
+    <li data-key="<?= $tagid ?>" class="tag iecss3"><?= $t ?></li>
+    <? } } ?>
+  </ul>
+  <div class="clear"></div>
+<? } ?>
+
 </div>
 
 <div class="clear"></div>
