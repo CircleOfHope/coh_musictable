@@ -15,6 +15,7 @@ class Songs extends MY_Controller {
         $this->load->model('Song');
         $this->load->model('Attachment');
         $this->load->model('Tag');
+	$this->load->model('TagType');
         $this->load->model('Language');
         $this->load->model('User');
         $this->load->helper('url');
@@ -108,10 +109,17 @@ class Songs extends MY_Controller {
     public function detail($id){
         try
         {
+            $data['id'] = $id;
             $data['admin'] = $this->session->userdata('admin') == 'TRUE';
             $data['song'] = $this->Song->get_one($id);
             $data['attachments'] = $this->Attachment->get_attachments_for_song($id);
             $data['tags'] = $this->Tag->get_tags_for_song(array('id' => intval($id),'deep'=>'true'));
+            $data['alltagtypes'] = $this->TagType->get_all();
+            $temp_array = array();
+            foreach ($data['alltagtypes'] as $tagtypeid => $tagtypename) {
+                $temp_array[$tagtypename] = $this->Tag->get_tags_for_tagtype($tagtypeid);
+            }
+            $data['allltags'] = $temp_array;
             $data['languages'] = $this->Language->get_languages_for_song($id);
             $data['header'] = $this->load->view('templates/header_view',$data,true);
             $data['footer'] = $this->load->view('templates/footer_view',$data,true);
@@ -155,7 +163,13 @@ class Songs extends MY_Controller {
  
             }
             $data['alltags'] =  $this->Tag->get_all(array('id' => intval($id),'deep'=>'true'));
+	    $data['alltagtypes'] = $this->TagType->get_all();
 	    $data['alllangs'] = $this->Language->get_all();
+            $temp_array = array();
+            foreach ($data['alltagtypes'] as $tagtypeid => $tagtypename) {
+		$temp_array[$tagtypename] = $this->Tag->get_tags_for_tagtype($tagtypeid);
+            }
+            $data['allltags'] = $temp_array;
             $data['header'] = $this->load->view('templates/header_view',$data,true);
             $data['footer'] = $this->load->view('templates/footer_view',$data,true);
             $this->load->view('songs/edit_view',$data);
