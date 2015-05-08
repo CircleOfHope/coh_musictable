@@ -51,10 +51,10 @@
     <?php foreach ($tag as $tagid => $t) { ?>
     <?php if(array_key_exists($tagid, $tags)) { ?>
     <li data-key="<?= $tagid ?>" class="tag iecss3"><?= $t ?></li>
-    <? } } ?>
+    <?php } } ?>
   </ul>
   <div class="clear"></div>
-<? } ?>
+<?php } ?>
 
 </div>
 

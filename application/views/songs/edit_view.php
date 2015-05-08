@@ -5,12 +5,12 @@
 <script	src="<?= base_url("/scripts/shared.js") ?>"></script>
 <script	src="<?= base_url("/scripts/edit_song.js") ?>"></script>
 
-<? if ($showUpdated) { ?>
+<?php if ($showUpdated) { ?>
   <div class="floating-info">Song saved</div>
 <script>
   $('.floating-info').delay(3000).fadeOut();
 </script>
-<? } ?>
+<?php } ?>
 <h1><?= $song->Title ?></h1><?= anchor('songs/detail/'.$song->id,'[Detail]') ?>
 <div class="line"></div>
 
@@ -57,32 +57,32 @@
     <div class="line"></div>
     <?php if ($id == 0) { ?>
   <p class="gray-message">Save the song before adding tags.</p>
-  <? } else { ?>
+  <?php } else { ?>
   <ul class="basic horizontal tags edit">
     <?php foreach ($tag as $tagid => $t) { ?>
     <li data-key="<?= $tagid ?>" class="tag iecss3 <?= array_key_exists($tagid, $tags) ? "selected" : "" ?>"><?= $t ?></li>
-    <? } ?>
+    <?php } ?>
   </ul>
   <div class="clear"></div>
-  <? } ?>
-<? } ?>
+  <?php } ?>
+<?php } ?>
 
   <h4>Attachments</h4>
   <div class="line"></div>
 <?php if ($id == 0) { ?>
   <p class="gray-message">Save the song before adding attachments.</p>
-<? } else { ?>
+<?php } else { ?>
   <table>
     <?php foreach ($attachments as $a) { ?>
     <tr data-key="<?= $a->id ?>">
     <td><a href="<?= MiscUtil::standardizeUrl($a->Url) ?>" title="<?= $a->Name ?>" target="_blank"><?= $a->Name ?></a><button class="small-button attachment-delete">Delete</button></td>
     </tr>
-    <? } ?>
+    <?php } ?>
     <tr>
       <td><a id="cmdShowNewAttachmentForm" href="#" title="New attachment">New</a></td>
     </tr>
   </table>
-<? } ?>
+<?php } ?>
 </div><!-- .column-two -->
 
 <div class="clear"></div>

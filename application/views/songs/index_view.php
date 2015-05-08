@@ -9,7 +9,7 @@ Welcome to the Music Table! There are a few things you should know about the Tab
 <h1>Music Database</h1>
 <form id="index_search_form" action="<?=site_url('songs/index')?>" method="post">
 	<div>
-<?
+<?php
 $checked = ' checked="checked"';
 ?>
 		<span><input type="radio" name="language" value="1" <?= $language == 1 ? $checked : '' ?> />English</span>
