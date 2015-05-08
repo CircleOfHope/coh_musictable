@@ -11,6 +11,8 @@ class Songs extends MY_Controller {
         parent::__construct();
         $this->load->add_package_path(APPPATH.'third_party/datamapper');
         $this->load->library('datamapper');
+        $this->load->library('MiscUtil');
+        $this->load->library('HtmlUtil');
         $this->load->database();
         $this->load->model('Song');
         $this->load->model('Attachment');
