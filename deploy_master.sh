@@ -29,7 +29,7 @@ perl -pi -e "s#(\[\'password\'\] = )\'\S+\'#\1\'$1\'#" coh_musictable/applicatio
 perl -pi -e "s#(\[\'database\'\] = )\'\S+\'#\1\'music\'#" coh_musictable/application/config/database.php
 
 #backup database and files
-mysqldump -u music -p$1 music > musictable.sql
+mysqldump -u music -p$1 music --routines > musictable.sql
 tar cfz backup/$timestamp.tar.gz application sparks system tools website musictable.sql
 rm musictable.sql
 
