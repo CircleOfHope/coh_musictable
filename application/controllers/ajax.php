@@ -11,7 +11,6 @@ class Ajax extends CI_Controller {
         $this->load->database();
         $this->load->model('Song');
         $this->load->model('Attachment');
-        $this->load->model('Language');
         $this->load->model('Tag');
         $this->load->helper('form');
     }
@@ -38,55 +37,6 @@ class Ajax extends CI_Controller {
         $this->Song->remove($id);
         //header('Content-type: application/x-json');
         echo json_encode(array('success' => true, 'error' => '', 'data' => $id));
-    }
-
-    /* ---------
-     * Languages
-     * --------- */
-    public function add_language($name = -1) {
-        if($this->session->userdata('admin') != 'TRUE') {
-            echo json_encode(array('success' => false, 'error' => 'action not authorized; not logged in', 'data' => null));
-            return;
-        }
-        $name = ($name != -1) ? $name : $_POST['name'];
-        $langid = $this->Language->add($name);
-        //header('Content-type: application/x-json');
-        echo json_encode(array('success' => true, 'error' => '', 'data' => $langid));
-    }
-
-    public function remove_language($id = -1) {
-        if($this->session->userdata('admin') != 'TRUE') {
-            echo json_encode(array('success' => false, 'error' => 'action not authorized; not logged in', 'data' => null));
-            return;
-        }
-        $id = ($id != -1) ? $id : $_POST['id'];
-        $this->Language->remove($id);
-        //header('Content-type: application/x-json');
-        echo json_encode(array('success' => true, 'error' => '', 'data' => $id));
-    }
-
-    public function add_language_to_song($langid = -1, $songid = -1) {
-        if($this->session->userdata('admin') != 'TRUE') {
-            echo json_encode(array('success' => false, 'error' => 'action not authorized; not logged in', 'data' => null));
-            return;
-        }
-        $langid = ($langid != -1) ? $langid : $_POST['langid'];
-        $songid = ($songid != -1) ? $songid : $_POST['songid'];
-        $this->Song->add_language($songid, $langid);
-        //header('Content-type: application/x-json');
-        echo json_encode(array('success' => true, 'error' => '', 'data' => null));
-    }
-
-    public function remove_language_from_song($langid = -1, $songid = -1) {
-        if($this->session->userdata('admin') != 'TRUE') {
-            echo json_encode(array('success' => false, 'error' => 'action not authorized; not logged in', 'data' => null));
-            return;
-        }
-        $langid = ($langid != -1) ? $langid : $_POST['langid'];
-        $songid = ($songid != -1) ? $songid : $_POST['songid'];
-        $this->Song->remove_language($songid, $langid);
-        //header('Content-type: application/x-json');
-        echo json_encode(array('success' => true, 'error' => '', 'data' => null));
     }
 
     /* ---------

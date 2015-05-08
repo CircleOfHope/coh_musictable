@@ -17,10 +17,6 @@
 			<td>Scripture</td>
 			<td><?=$song->Scripture?></td>
 		</tr>
-                <tr>
-                        <td>Language</td>
-                        <td><?=join('; ',$languages)?></td>
-                </tr>
 	</table>
 
 	<div style="margin-top: 10px">Notes</div>

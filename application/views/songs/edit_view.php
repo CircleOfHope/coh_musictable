@@ -56,7 +56,7 @@
     <h4><?= $tagtypename ?></h4>
     <div class="line"></div>
     <?php if ($id == 0) { ?>
-  <p class="gray-message">Save the song before adding languages.</p>
+  <p class="gray-message">Save the song before adding tags.</p>
   <? } else { ?>
   <ul class="basic horizontal tags edit">
     <?php foreach ($tag as $tagid => $t) { ?>

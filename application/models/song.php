@@ -8,7 +8,7 @@ class Song extends DataMapper {
         parent::__construct($id);
     }
 
-    var $has_many = array('tag','attachment','language');
+    var $has_many = array('tag','attachment');
     
     var $validation = array();
     
@@ -63,30 +63,6 @@ class Song extends DataMapper {
         $s = new Song();
         $s->get_by_id($id);
         $s->delete();
-    }
-
-    function add_language($songids, $langids) {
-        foreach(explode(',', $songids) as $songid) {
-            $s = new Song();
-            $s->get_by_id($songid);
-            foreach(explode(',', $langids) as $langid) {
-                $l = new Language();
-                $l->get_by_id($langid);
-                $s->save($l);
-            }
-        }
-    }
-
-    function remove_language($songids, $langids) {
-        foreach(explode(',', $songids) as $songid) {
-            $s = new Song();
-            $s->get_by_id($songid);
-            foreach(explode(',', $langids) as $langid) {
-                $l = new Language();
-                $l->get_by_id($langid);
-                $s->delete($l);
-            }
-        }
     }
 
     function add_attachment($songids, $attachids) {
