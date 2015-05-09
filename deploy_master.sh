@@ -30,7 +30,7 @@ perl -pi -e "s#(\[\'database\'\] = )\'\S+\'#\1\'music\'#" coh_musictable/applica
 
 #backup database and files
 mysqldump -u music -p$1 music --routines > musictable.sql
-tar cfz backup/$timestamp.tar.gz application sparks system tools website musictable.sql
+tar cfz backup/$timestamp.tar.gz application sparks system tools public_html musictable.sql
 rm musictable.sql
 
 echo "New website is staged, press Return to move it into production, otherwise Ctrl-C to abort."
@@ -41,11 +41,11 @@ mv application application.old
 mv coh_musictable/application application
 mv system system.old
 mv coh_musictable/system system
-mv website website.old
-mv coh_musictable/website website
+mv public_html public_html.old
+mv coh_musictable/website public_html
 rm -rf application.old
 rm -rf system.old
-rm -rf website.old
+rm -rf public_html.old
 
 pushd coh_musictable
 git checkout .
