@@ -32,6 +32,7 @@ class Tag extends DataMapper {
     foreach($tt->tag as $tag){
       $tags[$tag->id] = $tag->Name;
     }
+    natcasesort($tags);
     return $tags;
   }
 
@@ -52,11 +53,15 @@ class Tag extends DataMapper {
     return $t->Name;
   }
 
-  function add($name = '')
+  function add($name = '', $tagtypeid = -1)
   {
+    echo "add:" + $name + " " + $tagtypeid;
     $t = new Tag();
     $t->Name = $name;
     $t->save();
+    $tt = new TagType();
+    $tt->get_by_id($tagtypeid);
+    $t->save($tt);
     return $t->id;
   }
 

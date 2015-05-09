@@ -76,5 +76,29 @@ class TagType extends DataMapper {
     $t->get_by_id($id);
     $t->delete();
   }
+
+    function add_tag($tagtypeids, $tagids) {
+        foreach(explode(',', $tagtypeids) as $tagtypeid) {
+            $tt = new TagType();
+            $tt->get_by_id($tagtypeid);
+            foreach(explode(',', $tagids) as $tagid) {
+                $t = new Tag();
+                $t->get_by_id($tagid);
+                $tt->save($t);
+            }
+        }
+    }
+
+    function remove_tag($tagtypeids, $tagids) {
+        foreach(explode(',', $tagtypeids) as $tagtypeid) {
+            $tt = new TagType();
+            $tt->get_by_id($tagtypeid);
+            foreach(explode(',', $tagids) as $tagid) {
+                $t = new Tag();
+                $t->get_by_id($tagid);
+                $tt->delete($t);
+            }
+        }
+    }
 };
 ?>

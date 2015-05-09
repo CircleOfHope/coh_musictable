@@ -14,22 +14,6 @@ function ToggleTag(tagEl) {
 	$(tagEl).toggleClass('selected');
 }
 
-function ToggleLanguage(languageEl) {
-	var songId = $('#edit-song').data('song-id');
-	var isOn = $(languageEl).hasClass('selected');
-	var id = $(languageEl).data('key');
-	if (isOn) {
-		console.log(String.format('Removing language {0} from song {1}', id, songId));
-		$.post(base_url + 'ajax/remove_language_from_song', { langid: id, songid: songId })
-			.success(function () { console.log('Remove language successful'); });
-	} else {
-		console.log(String.format('Adding language {0} from song {1}', id, songId));
-		$.post(base_url + 'ajax/add_language_to_song', { langid: id, songid: songId })
-			.success(function () { console.log('Add language successful'); });
-	}
-	$(languageEl).toggleClass('selected');
-}
-
 function DeleteAttachment(buttonEl) {
 	if (!confirm('Are you sure you want to delete this attachment?')) return;
 
@@ -50,6 +34,29 @@ function CreateAttachment() {
 	console.log(String.format('Creating attachment for song {0}', songId));
 	$.post(base_url + 'ajax/create_attachment', { songid: songId, name: name, url: url }).success(function () {
 		console.log('Create attachment successful');
+		window.location.reload();
+	});
+}
+
+function DeleteTag(buttonEl) {
+	if (!confirm('Are you sure you want to delete this attachment?')) return;
+
+	var tagId = $(buttonEl).closest('tr').data('key');
+	console.log(String.format('Deleting tag {0}', tagId));
+	$.post(base_url + 'ajax/remove_tag', { id: tagId }).success(function () {
+		console.log('Delete tag successful');
+		window.location.reload();
+	});
+}
+
+function CreateTag() {
+	if ($('#dlgNewTag form').validate().form() != true) return;
+
+	var name = $('#txtNewTagName').val();
+	var tagtype = $('#txtNewTagType').val();
+	console.log('Creating tag');
+	$.post(base_url + 'ajax/add_tag', {name: name, tagtypeid: tagtype }).success(function () {
+		console.log('Create tag successful');
 		window.location.reload();
 	});
 }
@@ -77,6 +84,22 @@ $(document).ready(function () {
 			beforeClose: function () {
 				$('#dlgNewAttachment input').val("");
 				$('#dlgNewAttachment form').validate().resetForm();
+			}
+		});
+	});
+
+	$('#dlgNewTag form').validate();
+	$('#cmdShowNewTagForm').click(function (e) {
+		$('#dlgNewTag').dialog(
+		{
+			modal: true,
+			buttons: {
+				"Create": CreateTag,
+				Cancel: function () { $(this).dialog("close"); }
+			},
+			beforeClose: function () {
+				$('#dlgNewTag input').val("");
+				$('#dlgNewTag form').validate().resetForm();
 			}
 		});
 	});

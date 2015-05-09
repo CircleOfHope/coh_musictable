@@ -66,7 +66,7 @@
   <div class="clear"></div>
   <?php } ?>
 <?php } ?>
-
+  <a id="cmdShowNewTagForm" href="#" title="New tag">New Tag</a>
   <h4>Attachments</h4>
   <div class="line"></div>
 <?php if ($id == 0) { ?>
@@ -79,7 +79,7 @@
     </tr>
     <?php } ?>
     <tr>
-      <td><a id="cmdShowNewAttachmentForm" href="#" title="New attachment">New</a></td>
+      <td><a id="cmdShowNewAttachmentForm" href="#" title="New attachment">New Attachment</a></td>
     </tr>
   </table>
 <?php } ?>
@@ -94,6 +94,21 @@
       <input id="txtNewAttachmentName" name="name" type="text" class="required text ui-widget-content ui-corner-all" />
       <label for="txtNewAttachmentUrl">URL</label>
       <input id="txtNewAttachmentUrl" name="url" type="text" class="required ui-widget-content ui-corner-all" />
+    </fieldset>
+  </form>
+</div>
+
+<div id="dlgNewTag" style="display: none" title="New tag">
+  <form class="dialog">
+    <fieldset>
+      <label for="txtNewTagName">Name</label>
+      <input id="txtNewTagName" name="name" type="text" class="required text ui-widget-content ui-corner-all" />
+      <label for="txtNewTagType">TagType</label>
+      <select id="txtNewTagType" name="tagtype" class="required ui-widget-content ui-corner-all">
+      <?php foreach ($alltagtypes as $tagtypeid => $tagtypename) { ?>
+      <option value="<?= $tagtypeid ?>"><?= $tagtypename ?></option>
+      <?php } ?>
+      </select>
     </fieldset>
   </form>
 </div>

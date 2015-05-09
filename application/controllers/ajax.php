@@ -105,13 +105,14 @@ class Ajax extends CI_Controller {
     /* ---------
      * Tags
      * --------- */
-    public function add_tag($name = -1) {
+    public function add_tag($name = -1, $tagtypeid = -1) {
         if($this->session->userdata('admin') != 'TRUE') {
             echo json_encode(array('success' => false, 'error' => 'action not authorized; not logged in', 'data' => null));
             return;
         }
         $name = ($name != -1) ? $name : $_POST['name'];
-        $tagid = $this->Tag->add($name);
+	$tagtypeid = ($tagtypeid != -1) ? $tagtypeid : $_POST['tagtypeid'];
+        $tagid = $this->Tag->add($name, $tagtypeid);
         //header('Content-type: application/x-json');
         echo json_encode(array('success' => true, 'error' => '', 'data' => $tagid));
     }
@@ -147,6 +148,18 @@ class Ajax extends CI_Controller {
         $tagid = ($tagid != -1) ? $tagid : $_POST['tagid'];
         $songid = ($songid != -1) ? $songid : $_POST['songid'];
         $this->Song->remove_tag($songid, $tagid);
+        //header('Content-type: application/x-json');
+        echo json_encode(array('success' => true, 'error' => '', 'data' => null));
+    }
+
+    public function add_tag_to_tagtype($tagid = -1, $tagtypeid = -1) {
+        if($this->session->userdata('admin') != 'TRUE') {
+            echo json_encode(array('success' => false, 'error' => 'action not authorized; not logged in', 'data' => null));
+            return;
+        }
+        $tagid = ($tagid != -1) ? $tagid : $_POST['tagid'];
+        $tagtypeid = ($tagtypeid != -1) ? $tagtypeid : $_POST['tagtypeid'];
+        $this->TagType->add_tag($songid, $tagid);
         //header('Content-type: application/x-json');
         echo json_encode(array('success' => true, 'error' => '', 'data' => null));
     }
