@@ -1,0 +1,80 @@
+diff -u -r CodeIgniter/application/config/config.php coh_musictable/application/config/config.php
+--- CodeIgniter/application/config/config.php	2015-05-08 19:06:40.972998250 -0400
++++ coh_musictable/application/config/config.php	2015-05-08 20:54:47.402027980 -0400
+@@ -28,7 +28,7 @@
+ | variable so that it is blank.
+ |
+ */
+-$config['index_page'] = 'index.php';
++$config['index_page'] = '';
+ 
+ /*
+ |--------------------------------------------------------------------------
+@@ -226,7 +226,7 @@
+ | MUST set an encryption key.  See the user guide for info.
+ |
+ */
+-$config['encryption_key'] = '';
++$config['encryption_key'] = 'bob';
+ 
+ /*
+ |--------------------------------------------------------------------------
+diff -u -r CodeIgniter/application/config/database.php coh_musictable/application/config/database.php
+--- CodeIgniter/application/config/database.php	2015-05-08 19:06:40.972998250 -0400
++++ coh_musictable/application/config/database.php	2015-05-09 14:14:36.234464025 -0400
+@@ -48,11 +48,11 @@
+ $active_group = 'default';
+ $active_record = TRUE;
+ 
+-$db['default']['hostname'] = 'localhost';
+-$db['default']['username'] = '';
+-$db['default']['password'] = '';
+-$db['default']['database'] = '';
+-$db['default']['dbdriver'] = 'mysql';
++$db['default']['hostname'] = '127.0.0.1';
++$db['default']['username'] = 'musictable';
++$db['default']['password'] = 'musictable';
++$db['default']['database'] = 'musictable';
++$db['default']['dbdriver'] = 'mysqli';
+ $db['default']['dbprefix'] = '';
+ $db['default']['pconnect'] = TRUE;
+ $db['default']['db_debug'] = TRUE;
+Only in coh_musictable/application/config: datamapper.php
+diff -u -r CodeIgniter/application/config/routes.php coh_musictable/application/config/routes.php
+--- CodeIgniter/application/config/routes.php	2015-05-08 19:06:40.972998250 -0400
++++ coh_musictable/application/config/routes.php	2015-05-09 14:14:54.750975688 -0400
+@@ -38,7 +38,7 @@
+ |
+ */
+ 
+-$route['default_controller'] = "welcome";
++$route['default_controller'] = "songs/index";
+ $route['404_override'] = '';
+ 
+ 
+Only in coh_musictable/application/controllers: about.php
+Only in coh_musictable/application/controllers: ajax.php
+Only in coh_musictable/application/controllers: feedback.php
+Only in coh_musictable/application/controllers: songs.php
+Only in coh_musictable/application/controllers: table.php
+Only in coh_musictable/application/core: MY_Controller.php
+Only in coh_musictable/application/: datamapper
+Only in coh_musictable/application/language/english: datamapper_lang.php
+Only in coh_musictable/application/libraries: datamapper.php
+Only in coh_musictable/application/libraries: HtmlUtil.php
+Only in coh_musictable/application/libraries: MiscUtil.php
+Only in coh_musictable/application/models: attachment.php
+Only in coh_musictable/application/models: language.php
+Only in coh_musictable/application/models: song.php
+Only in coh_musictable/application/models: tag.php
+Only in coh_musictable/application/models: tagtype.php
+Only in coh_musictable/application/models: _template.php
+Only in coh_musictable/application/models: user.php
+Only in coh_musictable/application/third_party: datamapper
+Only in coh_musictable/application/views: about_view.php
+Only in coh_musictable/application/views: dmz_htmlform
+Only in coh_musictable/application/views: feedback_view.php
+Only in coh_musictable/application/views: login_view.php
+Only in coh_musictable/application/views: master_view.php
+Only in coh_musictable/application/views: songs
+Only in coh_musictable/application/views: templates
