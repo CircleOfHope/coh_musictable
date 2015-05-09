@@ -32,9 +32,9 @@ diff -u -r CodeIgniter/application/config/database.php coh_musictable/applicatio
 -$db['default']['database'] = '';
 -$db['default']['dbdriver'] = 'mysql';
 +$db['default']['hostname'] = '127.0.0.1';
-+$db['default']['username'] = 'musictable';
-+$db['default']['password'] = 'musictable';
-+$db['default']['database'] = 'musictable';
++$db['default']['username'] = 'music';
++$db['default']['password'] = 'music';
++$db['default']['database'] = 'music';
 +$db['default']['dbdriver'] = 'mysqli';
  $db['default']['dbprefix'] = '';
  $db['default']['pconnect'] = TRUE;
