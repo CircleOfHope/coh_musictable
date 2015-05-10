@@ -9,9 +9,10 @@ Welcome to the Music Table! There are a few things you should know about the Tab
 <h1>Music Database</h1>
 <form id="index_search_form" action="<?=site_url('songs/index')?>" method="post">
 <div>
+        <input type="hidden" id="pageno" name="pageno" value="1">
 	<input id="search_string" name="search_string" type="text" style="width: 180px" value="<?php if(isset($search_string)) echo $search_string; ?>" />
         <button type="button" onclick="javascript:$('option').removeAttr('selected');$('#search_string').val('');">Clear Form</button>
-	<button type="submit" name="submit" class="button" id="submit_btn">Search</button><br />
+	<button type="submit" name="submit_btn" class="button" id="submit_btn">Search</button><br />
 </div>
 <div>
 <?php foreach ($allltags as $tagtypename => $tag) { ?>

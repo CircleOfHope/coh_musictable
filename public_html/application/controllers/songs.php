@@ -73,7 +73,7 @@ class Songs extends MY_Controller {
 
     public function index() {
 
-        $page_index = MiscUtil::getRequestItemInt('p', 1) - 1;
+        $page_index = MiscUtil::getRequestItemInt('pageno', 1) - 1;
         
         $search_string = MiscUtil::getRequestItem('search_string', '');
         $data['search_string'] = $search_string;
@@ -103,7 +103,8 @@ class Songs extends MY_Controller {
         if($search_string && $search_string != '' || $language != Songs::LanguageBoth)
         {
 	  $query = $this->Song->get_multi(array('search_string' => $search_string, 'language' => $language, 'page_index' => $page_index, 'selected_tags' => $selected_tags));
-            $data['songs'] = array_slice($query->result(), $page_index * Song::page_size, Song::page_size);
+	  $data['songs'] = array_slice($query->result(), $page_index * Song::page_size, Song::page_size);
+	  //$data['songs'] = $query->result();
             $total_songs = $query->num_rows();
         }
         else

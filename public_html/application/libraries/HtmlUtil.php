@@ -20,7 +20,7 @@ class HtmlUtil
             $pageLink .= sprintf("&%s=%s", $key, urlencode($val));
           }
         }
-        echo sprintf("<a href=\"%s\">%d</a>", $pageLink, $x + 1);
+        echo sprintf("<a onclick=\"javascript:document.forms.index_search_form.pageno.value = %d;document.forms.index_search_form.submit();\" href=\"javascript:void(0)\">%d</a>", $x+1, $x + 1);
       }
       
       if ($x + 1 < $totalPages)
