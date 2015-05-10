@@ -17,6 +17,10 @@
 			<td>Scripture</td>
 			<td><?=$song->Scripture?></td>
 		</tr>
+		<tr>
+			<td>Lyrics Excerpt</td>
+			<td><?=$song->LyricsExcerpt?></td>
+		</tr>
 	</table>
 
 	<div style="margin-top: 10px">Notes</div>

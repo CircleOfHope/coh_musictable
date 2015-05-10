@@ -77,6 +77,23 @@ class Songs extends MY_Controller {
         
         $search_string = MiscUtil::getRequestItem('search_string', '');
         $data['search_string'] = $search_string;
+
+	$data['alltagtypes'] = $this->TagType->get_all();
+
+	$selected_tags = array();
+	$selected_tags_flat = array();
+	foreach ($data['alltagtypes'] as $tagtypeid => $tagtypename) {
+	  $selected_tags[$tagtypename] = MiscUtil::getRequestItem('tagtype_'.$tagtypename, array());
+          $selected_tags_flat = array_merge($selected_tags_flat, MiscUtil::getRequestItem('tagtype_'.$tagtypename, array()));
+	}
+	$data['selected_tags'] = $selected_tags;
+	$data['selected_tags_flat'] = $selected_tags_flat;
+
+	$temp_array = array();
+	foreach ($data['alltagtypes'] as $tagtypeid => $tagtypename) {
+	  $temp_array[$tagtypename] = $this->Tag->get_tags_for_tagtype($tagtypeid);
+	}
+	$data['allltags'] = $temp_array;
         
         $language = MiscUtil::getRequestItemInt('language', Songs::LanguageEnglish);
         $data['language'] = $language;
@@ -85,7 +102,7 @@ class Songs extends MY_Controller {
 
         if($search_string && $search_string != '' || $language != Songs::LanguageBoth)
         {
-            $query = $this->Song->get_multi(array('search_string' => $search_string, 'language' => $language, 'page_index' => $page_index));
+	  $query = $this->Song->get_multi(array('search_string' => $search_string, 'language' => $language, 'page_index' => $page_index, 'selected_tags' => $selected_tags));
             $data['songs'] = array_slice($query->result(), $page_index * Song::page_size, Song::page_size);
             $total_songs = $query->num_rows();
         }

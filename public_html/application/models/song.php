@@ -38,28 +38,35 @@ class Song extends DataMapper {
         $page_index = isset($options['page_index']) ? $options['page_index'] : 0;
         $search_string = $options['search_string'];
         $language = $options['language'];
+        $selected_tags = $options['selected_tags'];
+	$tag_query = '';
+	$tag_group = array();
+	foreach($selected_tags as $tags) {
+	  if($tags) {
+	    $tags_in_group = array();
+	    foreach($tags as $tag) {
+	      array_push($tags_in_group, "st.tag_id = $tag");
+	    }
+	    array_push($tag_group, 's.id IN (SELECT st.song_id FROM songs_tags st WHERE '.implode(' OR ', $tags_in_group).')');
+	  }
+	}
+	if($tag_group) {
+	  $tag_query = '('.implode(' AND ', $tag_group).') AND ';
+	}
 	$qstring = "
 SELECT distinct s.*,
 MATCH(s.Title, s.Artist, s.Scripture, s.LyricsExcerpt, s.Notes) AGAINST ('$search_string' in boolean mode) as score
 FROM songs s
     LEFT JOIN songs_tags st ON st.song_id = s.id
     LEFT JOIN tags t ON t.id = st.tag_id
-    LEFT JOIN tags_tagtypes tt ON tt.id = st.tag_id
 WHERE
+    $tag_query
     (
-        '$language' = ''
-        OR $language = 1 AND t.name = 'English'
-        OR $language = 2 AND t.name = 'Foreign'
-        OR $language = 3
-    )
-    AND
-    (
-    (
-        '$search_string' = '' OR MATCH(s.Title, s.Artist, s.Scripture, s.LyricsExcerpt, s.Notes) AGAINST ('$search_string' in boolean mode)
-    )
-    OR t.Name LIKE '%{$search_string}%'
+      ('$search_string' = '' OR MATCH(s.Title, s.Artist, s.Scripture, s.LyricsExcerpt, s.Notes) AGAINST ('$search_string' in boolean mode))
+      OR t.Name LIKE '%{$search_string}%'
     )
 ORDER BY score DESC, s.Title ASC;";
+	  error_log($qstring);
         return $this->db->query($qstring);
     }
 
