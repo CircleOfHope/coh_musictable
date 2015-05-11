@@ -19,10 +19,10 @@ class Song extends DataMapper {
         return $s->count();
     }
 
-    function get_all($page_index = 0)
+    function get_all($page_index = 1)
     {
         $s = new Song();
-        $s->where("Title IS NOT NULL AND Title <> ''")->order_by('Title','asc')->get_paged($page_index+1, self::page_size);
+        $s->where("Title IS NOT NULL AND Title <> ''")->order_by('Title','asc')->get_paged($page_index, self::page_size);
         return $s;
     }
     
@@ -37,7 +37,6 @@ class Song extends DataMapper {
     {
         $page_index = isset($options['page_index']) ? $options['page_index'] : 0;
         $search_string = $options['search_string'];
-        $language = $options['language'];
         $selected_tags = $options['selected_tags'];
 	$tag_query = '';
 	$tag_group = array();

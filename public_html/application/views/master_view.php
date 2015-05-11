@@ -7,7 +7,7 @@
 <title>CoH Music Table | Music</title>
 <?=link_tag("css/site.css")?>
 <?=link_tag("css/song.css")?>
-<script	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script	src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
 window.debug = <?= $this->config->item('log_threshold') >= 2 ? "true" : "false" ?>;
 window.base_url = '<?= base_url() ?>';

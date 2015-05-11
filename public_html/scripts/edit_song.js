@@ -39,7 +39,7 @@ function CreateAttachment() {
 }
 
 function DeleteTag(buttonEl) {
-	if (!confirm('Are you sure you want to delete this attachment?')) return;
+	if (!confirm('Are you sure you want to delete this tag?')) return;
 
 	var tagId = $(buttonEl).closest('tr').data('key');
 	console.log(String.format('Deleting tag {0}', tagId));
@@ -64,7 +64,7 @@ function CreateTag() {
 $(document).ready(function () {
 
 	jQuery.extend(jQuery.validator.messages, {
-		required: '&nbsp;*'
+		required: '&nbsp;*Required field*'
 	});
 
 	$('#edit-song').validate({});
@@ -105,6 +105,4 @@ $(document).ready(function () {
 	});
 
 	$('.tag').click(function (e) { ToggleTag(this); });
-        $('.language').click(function (e) { ToggleLanguage(this); });
-
 });

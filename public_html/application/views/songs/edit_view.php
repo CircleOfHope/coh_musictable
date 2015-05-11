@@ -1,6 +1,6 @@
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js" type="text/javascript"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js" type="text/javascript"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js" type="text/javascript"></script>
 <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" type="text/javascript"></script>
 <script	src="<?= base_url("/scripts/shared.js") ?>"></script>
 <script	src="<?= base_url("/scripts/edit_song.js") ?>"></script>
@@ -60,7 +60,7 @@
   <?php } else { ?>
   <ul class="basic horizontal tags edit">
     <?php foreach ($tag as $tagid => $t) { ?>
-    <li data-key="<?= $tagid ?>" class="tag iecss3 <?= array_key_exists($tagid, $tags) ? "selected" : "" ?>"><?= $t ?></li>
+    <li data-key="<?= $tagid ?>" class="tag <?= array_key_exists($tagid, $tags) ? "selected" : "" ?>"><?= $t ?></li>
     <?php } ?>
   </ul>
   <div class="clear"></div>

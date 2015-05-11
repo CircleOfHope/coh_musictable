@@ -28,9 +28,10 @@ th {
   text-align: left;
 }
 
-tr.alt {
-    background-color: #EEEEDD;
+tr.search_result_row:nth-child(even) {
+  background: #EEEEDD;
 }
+
 div.clear {
   height: 1px;
   clear: both;

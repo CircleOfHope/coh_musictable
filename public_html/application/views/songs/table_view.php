@@ -11,8 +11,8 @@
     </tr>
   </thead>
   <tbody>
-    <?php $count = 1; foreach($songs as $song): ?>
-    <tr <?php if($count % 2 == 0) echo 'class="alt"'; ?>>
+   <?php foreach($songs as $song) { ?>
+    <tr class="search_result_row">
       <td><?=$song->Title?></td>
       <td><?=$song->Artist?></td>
       <td><?=$song->LyricsExcerpt?></td>
@@ -21,10 +21,7 @@
       <td><a href="<?=site_url("songs/detail/$song->id")?>">View</a></td>
       <td><?php if($admin) { ?><a href="<?=site_url("songs/edit/$song->id")?>">Edit</a><?php } ?></td>
     </tr>
-    <?php $count++; endforeach; ?>
+     <?php } ?>
   </tbody>
 </table>
-<?php if (isset($url)) { HtmlUtil::writePagingLinks($url, $page_index, $total_pages, array(
-    "search_string" => $search_string,
-    "language" => $language
-)); } ?>
+<?php HtmlUtil::writePagingLinks("", $page_index, $total_pages); ?>

@@ -2,10 +2,6 @@
 
 class Songs extends MY_Controller {
 
-    const LanguageEnglish = 1;
-    const LanguageNonEnglish = 2;
-    const LanguageBoth = 3;
-
     public function __construct()
     {
         parent::__construct();
@@ -73,7 +69,7 @@ class Songs extends MY_Controller {
 
     public function index() {
 
-        $page_index = MiscUtil::getRequestItemInt('pageno', 1) - 1;
+        $page_index = MiscUtil::getRequestItemInt('pageno', 1);
         
         $search_string = MiscUtil::getRequestItem('search_string', '');
         $data['search_string'] = $search_string;
@@ -95,23 +91,11 @@ class Songs extends MY_Controller {
 	}
 	$data['allltags'] = $temp_array;
         
-        $language = MiscUtil::getRequestItemInt('language', Songs::LanguageEnglish);
-        $data['language'] = $language;
-
 	$data['alltags'] =  $this->Tag->get_all();
 
-        if($search_string && $search_string != '' || $language != Songs::LanguageBoth)
-        {
-	  $query = $this->Song->get_multi(array('search_string' => $search_string, 'language' => $language, 'page_index' => $page_index, 'selected_tags' => $selected_tags));
-	  $data['songs'] = array_slice($query->result(), $page_index * Song::page_size, Song::page_size);
-	  //$data['songs'] = $query->result();
-            $total_songs = $query->num_rows();
-        }
-        else
-        {
-	    $data['songs'] = $this->Song->get_all($page_index);
-	    $total_songs = $data['songs']->paged->total_rows;
-        }
+	$query = $this->Song->get_multi(array('search_string' => $search_string, 'page_index' => $page_index-1, 'selected_tags' => $selected_tags));
+	$data['songs'] = array_slice($query->result(), ($page_index-1) * Song::page_size, Song::page_size);
+	$total_songs = $query->num_rows();
         $data['url'] = current_url();
 
         $data['page_index'] = $page_index;

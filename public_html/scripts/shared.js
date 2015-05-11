@@ -94,35 +94,3 @@ $(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
 	var message = String.format('Failed to call \'{0}\' because \'{1}\'', ajaxOptions.url, thrownError);
 	LogError(message);
 });
-
-/* ValidValueBinding for KO */
-ValidValueBinding = function (validator) {
-	this.validator = validator;
-	this.init = this.init.delegate(this);
-	this.update = this.update.delegate(this);
-}
-
-ValidValueBinding.prototype.init = function (element, valueAccessor) {
-
-	$(element).change(this.elementOnChange.redirect(this, valueAccessor));
-}
-
-ValidValueBinding.prototype.update = function (element, valueAccessor) {
-
-	var value = ko.utils.unwrapObservable(valueAccessor());
-	$(element).val(value);
-}
-
-ValidValueBinding.prototype.elementOnChange = function (valueAccessor, element) {
-
-	var value = $(element).val();
-	if (value == '')
-		value = null;
-
-	var valid = this.validator.element(element); // runs validation for this element
-	if (!valid)
-		return;
-
-	var observable = valueAccessor();
-	observable(value);
-}
