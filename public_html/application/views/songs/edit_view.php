@@ -66,7 +66,7 @@
   <div class="clear"></div>
   <?php } ?>
 <?php } ?>
-  <a id="cmdShowNewTagForm" href="#" title="New tag">New Tag</a>
+  <a id="cmdShowNewTagForm" href="javascript:void(0);" title="New tag">New Tag</a>
   <h4>Attachments</h4>
   <div class="line"></div>
 <?php if ($id == 0) { ?>
@@ -79,7 +79,7 @@
     </tr>
     <?php } ?>
     <tr>
-      <td><a id="cmdShowNewAttachmentForm" href="#" title="New attachment">New Attachment</a></td>
+      <td><a id="cmdShowNewAttachmentForm" href="javascript:void(0);" title="New attachment">New Attachment</a></td>
     </tr>
   </table>
 <?php } ?>
