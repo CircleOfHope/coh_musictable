@@ -24,4 +24,4 @@
      <?php } ?>
   </tbody>
 </table>
-<?php HtmlUtil::writePagingLinks("", $page_index, $total_pages); ?>
+ <?php HtmlUtil::writePagingLinks(site_url("songs/index"), $page_index, $total_pages); ?>

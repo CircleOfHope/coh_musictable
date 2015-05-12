@@ -67,8 +67,11 @@ class Songs extends MY_Controller {
         $this->load->view('login_view',$data);
     }
 
-    public function index() {
+    public function index($pageno = -1) {
 
+      if($pageno > 0)
+	$page_index = $pageno;
+      else
         $page_index = MiscUtil::getRequestItemInt('pageno', 1);
         
         $search_string = MiscUtil::getRequestItem('search_string', '');
