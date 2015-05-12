@@ -36,7 +36,7 @@ class Song extends DataMapper {
     function get_multi($options = array())
     {
         $page_index = isset($options['page_index']) ? $options['page_index'] : 0;
-        $search_string = $options['search_string'];
+	$search_string = $this->db->escape_like_str($options['search_string']);
         $selected_tags = $options['selected_tags'];
 	$tag_query = '';
 	$tag_group = array();
@@ -63,8 +63,9 @@ WHERE
     (
       (MATCH(s.Title, s.Artist, s.Scripture, s.LyricsExcerpt, s.Notes) AGAINST ('$search_string' in boolean mode))
       OR t.Name LIKE '%{$search_string}%'
+      OR '$search_string' = ''
     )
-ORDER BY score DESC, s.Title ASC;";
+ORDER BY score DESC, REPLACE(s.Title, ',', '') ASC;";
         return $this->db->query($qstring);
     }
 
@@ -73,7 +74,7 @@ ORDER BY score DESC, s.Title ASC;";
         $s = new Song();
         foreach ($data as $key => $val)
             $s->$key = $val;  
-        
+
         $s->save();
         return $s->id;
     }
