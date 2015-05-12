@@ -65,7 +65,6 @@ WHERE
       OR t.Name LIKE '%{$search_string}%'
     )
 ORDER BY score DESC, s.Title ASC;";
-	  error_log($qstring);
         return $this->db->query($qstring);
     }
 
