@@ -61,7 +61,7 @@ FROM songs s
 WHERE
     $tag_query
     (
-      ('$search_string' = '' OR MATCH(s.Title, s.Artist, s.Scripture, s.LyricsExcerpt, s.Notes) AGAINST ('$search_string' in boolean mode))
+      (MATCH(s.Title, s.Artist, s.Scripture, s.LyricsExcerpt, s.Notes) AGAINST ('$search_string' in boolean mode))
       OR t.Name LIKE '%{$search_string}%'
     )
 ORDER BY score DESC, s.Title ASC;";

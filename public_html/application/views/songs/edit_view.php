@@ -66,6 +66,7 @@
   <div class="clear"></div>
   <?php } ?>
 <?php } ?>
+  <br />
   <a id="cmdShowNewTagForm" href="javascript:void(0);" title="New tag">New Tag</a>
   <h4>Attachments</h4>
   <div class="line"></div>
@@ -78,6 +79,7 @@
     <td><a href="<?= MiscUtil::standardizeUrl($a->Url) ?>" title="<?= $a->Name ?>" target="_blank"><?= $a->Name ?></a><button class="small-button attachment-delete">Delete</button></td>
     </tr>
     <?php } ?>
+       <tr><td>&nbsp;</td></tr>
     <tr>
       <td><a id="cmdShowNewAttachmentForm" href="javascript:void(0);" title="New attachment">New Attachment</a></td>
     </tr>

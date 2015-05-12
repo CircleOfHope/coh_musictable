@@ -20,6 +20,7 @@ a:hover {
 
 img { border: none; }
 table { border-collapse: collapse; }
+table.search_syntax_help td { border: 1px solid black; padding: 2px;}
 table.spaced td {
   padding: 10px 20px 0 0;
 }
