@@ -53,6 +53,12 @@ class Tag extends DataMapper {
     return $t->Name;
   }
 
+  function get_by_name($name) {
+    $t = new Tag;
+    $t->where("Name", $name)->get();
+    return $t->id;
+  }
+
   function add($name = '', $tagtypeid = -1)
   {
     echo "add:" + $name + " " + $tagtypeid;

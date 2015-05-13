@@ -52,6 +52,10 @@ class Song extends DataMapper {
 	if($tag_group) {
 	  $tag_query = '('.implode(' AND ', $tag_group).') AND ';
 	}
+	$tag_like_query = '';
+	foreach(explode(" ", $search_string) as $term) {
+	  $tag_like_query .= " OR t.Name LIKE '%{$term}%'";
+	}
 	$qstring = "
 SELECT distinct s.*,
 MATCH(s.Title, s.Artist, s.Scripture, s.LyricsExcerpt, s.Notes) AGAINST ('$search_string' in boolean mode) as score
@@ -62,10 +66,12 @@ WHERE
     $tag_query
     (
       (MATCH(s.Title, s.Artist, s.Scripture, s.LyricsExcerpt, s.Notes) AGAINST ('$search_string' in boolean mode))
-      OR t.Name LIKE '%{$search_string}%'
+      $tag_like_query
       OR '$search_string' = ''
     )
 ORDER BY score DESC, REPLACE(s.Title, ',', '') ASC;";
+	$this->db->query($qstring);
+	//error_log($qstring);
         return $this->db->query($qstring);
     }
 
@@ -114,6 +120,12 @@ ORDER BY score DESC, REPLACE(s.Title, ',', '') ASC;";
                 $s->delete($a);
             }
         }
+    }
+
+    function has_tag($songid, $tagid) {
+      $s = new Song();
+      $s->get_by_id($songid);
+      return $s->where_related_tag('id', $tagid)->get_by_id($songid)->result_count() > 0;
     }
 
     function add_tag($songids, $tagids) {

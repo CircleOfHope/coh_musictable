@@ -164,6 +164,8 @@ class Songs extends MY_Controller {
                 }
                 $data['tags'] = $this->Tag->get_tags_for_song(array('id' => intval($id),'deep'=>'true'));
             }
+	    $data['quarantined_id'] = $this->Tag->get_by_name('Quarantined');
+	    $data['quarantined'] = $this->Song->has_tag($id, $data['quarantined_id']);
             $data['alltags'] =  $this->Tag->get_all(array('id' => intval($id),'deep'=>'true'));
 	    $data['alltagtypes'] = $this->TagType->get_all();
             $temp_array = array();

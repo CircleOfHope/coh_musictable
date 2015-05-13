@@ -17,7 +17,7 @@
 <div class="column-one">
 
   <form id="edit-song" data-song-id="<?= $id ?>" action='<?= site_url("songs/edit/".$id); ?>' method="post">
-      
+
     <table>
       <tr>
         <td><label for="title">Title</label></td>
@@ -39,10 +39,13 @@
         <td valign="top"><label for="notes">Notes</label></td>
         <td><textarea id="notes" name="notes"><?= $song->Notes ?></textarea></td>
       </tr>
-      <tr>
-        <td><label for="quarantined">Quarantined</label></td>
-        <td><input type="checkbox" name="quarantined" value="quarantined" <?= ($song->Quarantined) ? "checked=\"checked\"" : "" ?> /></td>
-      </tr>
+      <tr><td></td>
+        <td>
+          <ul class="basic horizontal tags edit">
+            <li data-key="<?= $quarantined_id ?>" class="tag <?= $quarantined ? "selected" : "" ?>">Quarantined</li>
+          </ul>
+        </td>
+       </tr>
     </table>
 
     <br />
