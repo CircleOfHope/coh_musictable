@@ -2,7 +2,7 @@
 <div class="line"></div>
 
 <div class="column-one">
-        <?=($song->Quarantined)?'<span class="quarantine">This song is under quarantine.</span>':''?>
+        <?=($quarantined)?'<span class="quarantine">This song is under quarantine.</span>':''?>
 	<table class="spaced">
 
 		<tr>

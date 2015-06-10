@@ -125,6 +125,8 @@ class Songs extends MY_Controller {
                 $temp_array[$tagtypename] = $this->Tag->get_tags_for_tagtype($tagtypeid);
             }
             $data['allltags'] = $temp_array;
+            $data['quarantined_id'] = $this->Tag->get_by_name('Quarantined');
+	    $data['quarantined'] = $this->Song->has_tag($id, $data['quarantined_id']);
             $data['header'] = $this->load->view('templates/header_view',$data,true);
             $data['footer'] = $this->load->view('templates/footer_view',$data,true);
             $this->load->view('songs/detail_view',$data);
